@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kartik Kaathi Roll</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--red:#c0392b;--orange:#e67e22;--yellow:#f1c40f;--dark:#1a0a00;--cream:#fff8ee;--green:#25d366}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--dark);color:var(--cream);min-height:100vh;padding-bottom:80px}
+.hero{background:linear-gradient(135deg,#1a0a00 0%,#3d1500 50%,#1a0a00 100%);padding:24px 20px 16px;text-align:center;border-bottom:3px solid var(--orange)}
+.flame{font-size:36px;animation:flicker 1.5s infinite alternate;display:block}
+@keyframes flicker{0%{transform:scale(1) rotate(-2deg)}100%{transform:scale(1.1) rotate(2deg)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,52px);font-weight:900;color:var(--yellow);text-shadow:0 0 30px rgba(241,196,15,0.5);margin:8px 0}
+.hero h1 span{color:var(--orange)}
+.tagline{color:rgba(255,248,238,0.75);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.special-wrap{padding:14px 16px 0;max-width:800px;margin:0 auto}
+.special-banner{background:linear-gradient(135deg,var(--red),var(--orange));border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(230,126,34,0.4)}50%{box-shadow:0 0 0 8px rgba(230,126,34,0)}}
+.special-banner .stitle{font-weight:700;font-size:14px}
+.special-banner .sdesc{font-size:12px;opacity:0.85}
+.cart-bar{position:sticky;top:0;z-index:100;background:var(--red);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.cart-info{font-size:14px;font-weight:600}
+.cart-total{font-size:18px;font-weight:700;color:var(--yellow)}
+.top-btn{background:var(--yellow);color:var(--dark);border:none;padding:8px 16px;border-radius:25px;font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s}
+.top-btn:hover{transform:scale(1.05)}
+.top-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.menu-section{padding:20px 16px;max-width:800px;margin:0 auto}
+.section-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--orange);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(230,126,34,0.3);display:flex;align-items:center;gap:8px}
+.roll-card{background:linear-gradient(135deg,#2a1000,#1f0d00);border:1px solid rgba(230,126,34,0.25);border-radius:20px;padding:18px;margin-bottom:18px;transition:border-color 0.3s}
+.roll-card:hover{border-color:rgba(230,126,34,0.6)}
+.roll-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px}
+.roll-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:10px}
+.roll-name{font-family:'Playfair Display',serif;font-size:19px;color:var(--yellow);font-weight:700}
+.roll-desc{font-size:12px;color:rgba(255,248,238,0.55);margin-top:3px}
+.base-price{background:var(--orange);color:white;padding:4px 12px;border-radius:20px;font-weight:700;font-size:14px;white-space:nowrap}
+.spice-row{margin-bottom:14px}
+.spice-row label,.option-group label{font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:1px;font-weight:600;display:block;margin-bottom:6px}
+.spice-btns,.option-btns{display:flex;gap:6px;flex-wrap:wrap}
+.spice-btn,.opt-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:var(--cream);padding:6px 11px;border-radius:20px;font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s}
+.spice-btn:hover{border-color:var(--red)}
+.spice-btn.active{background:var(--red);border-color:var(--red);color:white;font-weight:600}
+.opt-btn:hover{border-color:var(--orange);color:var(--orange)}
+.opt-btn.active{background:var(--orange);border-color:var(--orange);color:white;font-weight:600}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap;gap:10px}
+.qty-control{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.06);border-radius:25px;padding:4px 4px 4px 12px}
+.qty-control span{font-weight:700;font-size:15px;min-width:18px;text-align:center}
+.qty-btn{width:30px;height:30px;border-radius:50%;border:none;background:var(--orange);color:white;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.15s;font-family:'Poppins',sans-serif}
+.qty-btn:hover{transform:scale(1.1)}
+.add-btn{background:linear-gradient(135deg,var(--red),var(--orange));color:white;border:none;padding:10px 20px;border-radius:25px;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 15px rgba(192,57,43,0.4)}
+.add-btn:hover{transform:translateY(-2px)}
+.combo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.combo-card{background:linear-gradient(135deg,#2a1000,#1f0d00);border:1px solid rgba(241,196,15,0.3);border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:all 0.2s}
+.combo-card:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.combo-icon{font-size:28px;margin-bottom:6px}
+.combo-name{font-size:13px;font-weight:600;color:var(--yellow);margin-bottom:4px}
+.combo-desc{font-size:11px;color:rgba(255,248,238,0.55);margin-bottom:8px}
+.combo-price{background:var(--yellow);color:var(--dark);padding:3px 10px;border-radius:12px;font-weight:700;font-size:13px;display:inline-block}
+.combo-old{text-decoration:line-through;color:rgba(255,248,238,0.4);font-size:11px;margin-right:4px}
+.coupon-section{background:linear-gradient(135deg,#2a1000,#1f0d00);border:1px dashed rgba(241,196,15,0.4);border-radius:16px;padding:16px;margin-bottom:20px}
+.coupon-section h4{color:var(--yellow);font-size:14px;margin-bottom:10px}
+.coupon-row{display:flex;gap:8px}
+.coupon-input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:var(--cream);padding:10px 14px;border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;outline:none}
+.coupon-input::placeholder{color:rgba(255,248,238,0.35)}
+.coupon-btn{background:var(--yellow);color:var(--dark);border:none;padding:10px 16px;border-radius:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+.coupon-msg{font-size:12px;margin-top:8px;font-weight:600}
+.coupon-msg.ok{color:#2ecc71}
+.coupon-msg.err{color:var(--red)}
+.coupon-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ctag{background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.3);color:var(--yellow);padding:3px 10px;border-radius:10px;font-size:11px;cursor:pointer}
+.ctag:hover{background:rgba(241,196,15,0.2)}
+.cart-preview{background:linear-gradient(135deg,#2a1000,#1f0d00);border:1px solid rgba(230,126,34,0.3);border-radius:20px;padding:20px;margin-bottom:20px}
+.cart-preview h3{font-family:'Playfair Display',serif;color:var(--yellow);margin-bottom:14px;font-size:18px}
+.delivery-badge{background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.delivery-badge .dtext{font-size:13px;color:#2ecc71;font-weight:600}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:13px;gap:8px}
+.cart-item:last-child{border-bottom:none}
+.ci-name{flex:1;color:var(--cream)}
+.ci-detail{color:rgba(255,248,238,0.5);font-size:11px;margin-top:2px}
+.ci-price{color:var(--yellow);font-weight:700;white-space:nowrap}
+.rm-btn{background:rgba(192,57,43,0.3);border:none;color:var(--red);width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rm-btn:hover{background:var(--red);color:white}
+.dis-row{display:flex;justify-content:space-between;padding:8px 0;color:#2ecc71;font-size:13px}
+.grand-total{display:flex;justify-content:space-between;margin-top:10px;padding-top:12px;border-top:1px solid rgba(230,126,34,0.3);font-size:18px;font-weight:700}
+.grand-total span:last-child{color:var(--yellow)}
+.empty-msg{text-align:center;color:rgba(255,248,238,0.35);font-size:13px;padding:20px 0}
+.wa-order-btn{width:100%;background:#25d366;color:white;border:none;padding:16px;border-radius:16px;font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;transition:all 0.2s;box-shadow:0 4px 20px rgba(37,211,102,0.3)}
+.wa-order-btn:hover{transform:translateY(-2px)}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.rev-card{background:linear-gradient(135deg,#2a1000,#1f0d00);border:1px solid rgba(230,126,34,0.2);border-radius:14px;padding:14px}
+.rev-stars{color:var(--yellow);font-size:14px;margin-bottom:6px}
+.rev-text{font-size:12px;color:rgba(255,248,238,0.75);line-height:1.5;margin-bottom:8px}
+.rev-name{font-size:11px;color:var(--orange);font-weight:600}
+.info-section{background:linear-gradient(135deg,#2a1000,#1f0d00);border-top:2px solid var(--orange);padding:28px 20px;text-align:center}
+.info-section h3{font-family:'Playfair Display',serif;color:var(--yellow);font-size:20px;margin-bottom:16px}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:600px;margin:0 auto 20px}
+.info-item{background:rgba(255,255,255,0.04);border:1px solid rgba(230,126,34,0.2);border-radius:14px;padding:14px}
+.info-item .icon{font-size:22px;margin-bottom:6px}
+.info-item .lbl{font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.info-item .val{font-size:13px;color:var(--cream);font-weight:500;line-height:1.5}
+.btn-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.call-btn{background:linear-gradient(135deg,var(--red),var(--orange));color:white;border:none;padding:14px 28px;border-radius:14px;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;text-decoration:none}
+.call-btn:hover{transform:translateY(-2px)}
+.maps-btn{background:rgba(255,255,255,0.08);color:var(--cream);border:1px solid rgba(255,255,255,0.2);padding:14px 22px;border-radius:14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;text-decoration:none}
+.maps-btn:hover{border-color:var(--orange);color:var(--orange)}
+.wa-float{position:fixed;bottom:20px;right:20px;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.5);z-index:200;border:none;animation:wap 2s infinite}
+@keyframes wap{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.5)}50%{box-shadow:0 0 0 12px rgba(37,211,102,0)}}
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;align-items:center;justify-content:center}
+.success-overlay.show{display:flex}
+.success-box{background:linear-gradient(135deg,#2a1000,#3d1500);border:2px solid var(--green);border-radius:24px;padding:32px 28px;text-align:center;max-width:320px;width:90%;animation:pop 0.3s ease}
+@keyframes pop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+.success-box .big{font-size:56px;margin-bottom:12px}
+.success-box h3{font-family:'Playfair Display',serif;color:var(--yellow);font-size:22px;margin-bottom:8px}
+.success-box p{color:rgba(255,248,238,0.7);font-size:13px;margin-bottom:20px}
+.close-btn{background:var(--green);color:white;border:none;padding:12px 28px;border-radius:25px;font-family:'Poppins',sans-serif;font-weight:700;cursor:pointer;font-size:14px}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--orange);color:white;padding:11px 22px;border-radius:30px;font-weight:600;font-size:13px;z-index:999;transition:transform 0.3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:480px){.options-grid,.combo-grid,.reviews-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="flame">🔥</span>
+  <h1>Kartik <span>Kaathi</span> Roll</h1>
+  <p class="tagline">Fresh • Spicy • Delicious</p>
+</div>
+
+<div class="special-wrap">
+  <div class="special-banner">
+    <span style="font-size:24px">⭐</span>
+    <div style="flex:1">
+      <div class="stitle">Today's Special!</div>
+      <div class="sdesc">Double Chicken Roll + Cold Drink = only ₹130!</div>
+    </div>
+    <span style="font-size:20px">🌯</span>
+  </div>
+</div>
+
+<div class="cart-bar">
+  <div class="cart-info">🛒 <span id="cart-count">0</span> items</div>
+  <div class="cart-total">₹<span id="cart-total-bar">0</span></div>
+  <button class="top-btn" id="top-btn" disabled onclick="scrollToCart()">View Order ↓</button>
+</div>
+
+<div class="menu-section">
+
+  <div class="section-title">🌯 Our Menu</div>
+
+  <!-- CHICKEN -->
+  <div class="roll-card">
+    <img class="roll-img" src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=600&q=80" alt="Chicken Roll" onerror="this.style.display='none'"/>
+    <div class="roll-header">
+      <div><span style="font-size:22px">🍗</span> <span class="roll-name">Chicken Kaathi Roll</span>
+        <div class="roll-desc">Juicy chicken wrapped in flaky paratha</div></div>
+      <div class="base-price">₹80</div>
+    </div>
+    <div class="spice-row">
+      <label>🌶️ Spice Level</label>
+      <div class="spice-btns">
+        <button class="spice-btn" data-s="chicken" data-v="Mild" onclick="setSpice(this,'chicken')">😌 Mild</button>
+        <button class="spice-btn active" data-s="chicken" data-v="Medium" onclick="setSpice(this,'chicken')">😊 Medium</button>
+        <button class="spice-btn" data-s="chicken" data-v="Spicy" onclick="setSpice(this,'chicken')">🥵 Spicy</button>
+        <button class="spice-btn" data-s="chicken" data-v="Extra Spicy" onclick="setSpice(this,'chicken')">🔥 Extra</button>
+      </div>
+    </div>
+    <div class="options-grid">
+      <div class="option-group"><label>🥚 Egg</label>
+        <div class="option-btns">
+          <button class="opt-btn active" data-g="ce" data-v="No Egg" data-p="0" onclick="selOpt(this)">No Egg</button>
+          <button class="opt-btn" data-g="ce" data-v="Single Egg" data-p="15" onclick="selOpt(this)">Single +₹15</button>
+          <button class="opt-btn" data-g="ce" data-v="Double Egg" data-p="25" onclick="selOpt(this)">Double +₹25</button>
+        </div>
+      </div>
+      <div class="option-group"><label>🍗 Stuffing</label>
+        <div class="option-btns">
+          <button class="opt-btn active" data-g="cs" data-v="Single Chicken" data-p="0" onclick="selOpt(this)">Single</button>
+          <button class="opt-btn" data-g="cs" data-v="Double Chicken" data-p="40" onclick="selOpt(this)">Double +₹40</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="qty-control"><span>Qty:</span>
+        <button class="qty-btn" onclick="chgQty('c',-1)">−</button>
+        <span id="qc">1</span>
+        <button class="qty-btn" onclick="chgQty('c',1)">+</button>
+      </div>
+      <div style="color:var(--orange);font-weight:700">₹<span id="pc">80</span></div>
+      <button class="add-btn" onclick="addCart('c')">Add 🛒</button>
+    </div>
+  </div>
+
+  <!-- VEG -->
+  <div class="roll-card">
+    <img class="roll-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Veg Roll" onerror="this.style.display='none'"/>
+    <div class="roll-header">
+      <div><span style="font-size:22px">🥗</span> <span class="roll-name">Veg Kaathi Roll</span>
+        <div class="roll-desc">Fresh veggies with spicy masala</div></div>
+      <div class="base-price">₹50</div>
+    </div>
+    <div class="spice-row">
+      <label>🌶️ Spice Level</label>
+      <div class="spice-btns">
+        <button class="spice-btn" data-s="veg" data-v="Mild" onclick="setSpice(this,'veg')">😌 Mild</button>
+        <button class="spice-btn active" data-s="veg" data-v="Medium" onclick="setSpice(this,'veg')">😊 Medium</button>
+        <button class="spice-btn" data-s="veg" data-v="Spicy" onclick="setSpice(this,'veg')">🥵 Spicy</button>
+        <button class="spice-btn" data-s="veg" data-v="Extra Spicy" onclick="setSpice(this,'veg')">🔥 Extra</button>
+      </div>
+    </div>
+    <div class="options-grid">
+      <div class="option-group"><label>🥚 Egg</label>
+        <div class="option-btns">
+          <button class="opt-btn active" data-g="ve" data-v="No Egg" data-p="0" onclick="selOpt(this)">No Egg</button>
+          <button class="opt-btn" data-g="ve" data-v="Single Egg" data-p="15" onclick="selOpt(this)">Single +₹15</button>
+          <button class="opt-btn" data-g="ve" data-v="Double Egg" data-p="25" onclick="selOpt(this)">Double +₹25</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="qty-control"><span>Qty:</span>
+        <button class="qty-btn" onclick="chgQty('v',-1)">−</button>
+        <span id="qv">1</span>
+        <button class="qty-btn" onclick="chgQty('v',1)">+</button>
+      </div>
+      <div style="color:var(--orange);font-weight:700">₹<span id="pv">50</span></div>
+      <button class="add-btn" onclick="addCart('v')">Add 🛒</button>
+    </div>
+  </div>
+
+  <!-- PANEER -->
+  <div class="roll-card">
+    <img class="roll-img" src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" alt="Paneer Roll" onerror="this.style.display='none'"/>
+    <div class="roll-header">
+      <div><span style="font-size:22px">🧀</span> <span class="roll-name">Paneer Kaathi Roll</span>
+        <div class="roll-desc">Soft paneer in tandoori spices</div></div>
+      <div class="base-price">₹70</div>
+    </div>
+    <div class="spice-row">
+      <label>🌶️ Spice Level</label>
+      <div class="spice-btns">
+        <button class="spice-btn" data-s="paneer" data-v="Mild" onclick="setSpice(this,'paneer')">😌 Mild</button>
+        <button class="spice-btn active" data-s="paneer" data-v="Medium" onclick="setSpice(this,'paneer')">😊 Medium</button>
+        <button class="spice-btn" data-s="paneer" data-v="Spicy" onclick="setSpice(this,'paneer')">🥵 Spicy</button>
+        <button class="spice-btn" data-s="paneer" data-v="Extra Spicy" onclick="setSpice(this,'paneer')">🔥 Extra</button>
+      </div>
+    </div>
+    <div class="options-grid">
+      <div class="option-group"><label>🥚 Egg</label>
+        <div class="option-btns">
+          <button class="opt-btn active" data-g="pe" data-v="No Egg" data-p="0" onclick="selOpt(this)">No Egg</button>
+          <button class="opt-btn" data-g="pe" data-v="Single Egg" data-p="15" onclick="selOpt(this)">Single +₹15</button>
+          <button class="opt-btn" data-g="pe" data-v="Double Egg" data-p="25" onclick="selOpt(this)">Double +₹25</button>
+        </div>
+      </div>
+      <div class="option-group"><label>🧀 Stuffing</label>
+        <div class="option-btns">
+          <button class="opt-btn active" data-g="ps" data-v="Single Paneer" data-p="0" onclick="selOpt(this)">Single</button>
+          <button class="opt-btn" data-g="ps" data-v="Double Paneer" data-p="30" onclick="selOpt(this)">Double +₹30</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="qty-control"><span>Qty:</span>
+        <button class="qty-btn" onclick="chgQty('p',-1)">−</button>
+        <span id="qp">1</span>
+        <button class="qty-btn" onclick="chgQty('p',1)">+</button>
+      </div>
+      <div style="color:var(--orange);font-weight:700">₹<span id="pp">70</span></div>
+      <button class="add-btn" onclick="addCart('p')">Add 🛒</button>
+    </div>
+  </div>
+
+  <!-- COMBOS -->
+  <div class="section-title">🎉 Combo Offers</div>
+  <div class="combo-grid">
+    <div class="combo-card" onclick="addCombo('Roll + Drink Combo','Any roll + Cold Drink',90)">
+      <div class="combo-icon">🌯🥤</div>
+      <div class="combo-name">Roll + Drink</div>
+      <div class="combo-desc">Any roll + Cold Drink</div>
+      <div><span class="combo-old">₹110</span><span class="combo-price">₹90</span></div>
+    </div>
+    <div class="combo-card" onclick="addCombo('Double Chicken Combo','2 Chicken Rolls',130)">
+      <div class="combo-icon">🌯🌯</div>
+      <div class="combo-name">Double Roll</div>
+      <div class="combo-desc">2 Chicken Rolls</div>
+      <div><span class="combo-old">₹160</span><span class="combo-price">₹130</span></div>
+    </div>
+    <div class="combo-card" onclick="addCombo('Family Pack','4 Rolls + 2 Drinks',299)">
+      <div class="combo-icon">👨‍👩‍👧</div>
+      <div class="combo-name">Family Pack</div>
+      <div class="combo-desc">4 Rolls + 2 Drinks</div>
+      <div><span class="combo-old">₹380</span><span class="combo-price">₹299</span></div>
+    </div>
+    <div class="combo-card" onclick="addCombo('Mix Pack','1 Chicken + 1 Paneer Roll',120)">
+      <div class="combo-icon">🍗🧀</div>
+      <div class="combo-name">Mix Pack</div>
+      <div class="combo-desc">1 Chicken + 1 Paneer</div>
+      <div><span class="combo-old">₹150</span><span class="combo-price">₹120</span></div>
+    </div>
+  </div>
+
+  <!-- COUPON -->
+  <div class="coupon-section">
+    <h4>🏷️ Have a Coupon?</h4>
+    <div class="coupon-row">
+      <input class="coupon-input" id="cinput" type="text" placeholder="e.g. FIRST10"/>
+      <button class="coupon-btn" onclick="applyCoupon()">Apply</button>
+    </div>
+    <div id="cmsg" class="coupon-msg"></div>
+    <div class="coupon-tags">
+      <span class="ctag" onclick="useCode('FIRST10')">FIRST10 — 10% off</span>
+      <span class="ctag" onclick="useCode('SAVE20')">SAVE20 — ₹20 off</span>
+      <span class="ctag" onclick="useCode('KARTIK5')">KARTIK5 — 5% off</span>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div class="cart-preview" id="cart-section">
+    <h3>🛒 Your Order</h3>
+    <div class="delivery-badge"><span style="font-size:20px">⏱️</span><div class="dtext">Ready in approximately 15–20 minutes</div></div>
+    <div id="citems"></div>
+    <div id="drow" style="display:none" class="dis-row"><span>🏷️ Discount</span><span>-₹<span id="damt">0</span></span></div>
+    <div id="ctotal-sec" style="display:none">
+      <div class="grand-total"><span>Total</span><span>₹<span id="gtotal">0</span></span></div>
+      <button class="wa-order-btn" onclick="orderWA()"><span style="font-size:22px">📱</span> Order on WhatsApp</button>
+    </div>
+    <div id="emsg" class="empty-msg">No items yet — add some rolls! 🌯</div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="section-title">⭐ Customer Reviews</div>
+  <div class="reviews-grid">
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Best kaathi roll in Etah! Chicken stuffing is amazing 🔥"</div><div class="rev-name">— Rahul K.</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Paneer roll bahut tasty tha! Zaroor aaunga dobara!"</div><div class="rev-name">— Priya S.</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★☆</div><div class="rev-text">"Spicy chicken roll — perfect! Fast service too 👍"</div><div class="rev-name">— Amit V.</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Combo deal is great value. Family loved it!"</div><div class="rev-name">— Sunita M.</div></div>
+  </div>
+
+</div>
+
+<!-- INFO -->
+<div class="info-section">
+  <h3>📍 Visit Us</h3>
+  <div class="info-grid">
+    <div class="info-item"><div class="icon">👨‍🍳</div><div class="lbl">Owner</div><div class="val">Jagdish Singh</div></div>
+    <div class="info-item"><div class="icon">📍</div><div class="lbl">Address</div><div class="val">Railway Road, Etah<br>UP 207001</div></div>
+    <div class="info-item"><div class="icon">⏰</div><div class="lbl">Timings</div><div class="val">Daily<br>11 AM – 10 PM</div></div>
+    <div class="info-item"><div class="icon">📱</div><div class="lbl">Contact</div><div class="val">+91 97171 59022</div></div>
+  </div>
+  <div class="btn-row">
+    <a class="call-btn" href="tel:+919717159022">📞 Call Now</a>
+    <a class="maps-btn" href="https://maps.google.com/?q=Railway+Road+Etah+Uttar+Pradesh+207001" target="_blank">🗺️ Directions</a>
+  </div>
+</div>
+
+<button class="wa-float" onclick="window.open('https://wa.me/919717159022?text=Hi! I want to order from Kartik Kaathi Roll','_blank')">📱</button>
+
+<div class="success-overlay" id="soverlay">
+  <div class="success-box">
+    <div class="big">🎉</div>
+    <h3>Order Sent!</h3>
+    <p>Your order has been sent on WhatsApp. We'll confirm shortly!</p>
+    <button class="close-btn" onclick="closeSuccess()">Done ✓</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE={c:80,v:50,p:70};
+const qty={c:1,v:1,p:1};
+const spiceVal={c:'Medium',v:'Medium',p:'Medium'};
+const O={};
+let cart=[];
+let coupon='';
+const COUPONS={'FIRST10':{t:'pct',v:10,l:'10% off'},'SAVE20':{t:'flat',v:20,l:'₹20 off'},'KARTIK5':{t:'pct',v:5,l:'5% off'}};
+const NAMES={c:'Chicken Kaathi Roll',v:'Veg Kaathi Roll',p:'Paneer Kaathi Roll'};
+const GROUPS={c:['ce','cs'],v:['ve'],p:['pe','ps']};
+
+function setSpice(btn,type){
+  document.querySelectorAll(`[data-s="${type}"]`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');spiceVal[type]=btn.dataset.v;
+}
+
+function selOpt(btn){
+  const g=btn.dataset.g;
+  document.querySelectorAll(`[data-g="${g}"]`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  O[g]={v:btn.dataset.v,p:parseInt(btn.dataset.p)};
+  const type=g[0];updateP(type);
+}
+
+function getExtra(type){return(GROUPS[type]||[]).reduce((s,g)=>s+(O[g]?.p||0),0);}
+function updateP(type){document.getElementById('p'+type).textContent=(BASE[type]+getExtra(type))*qty[type];}
+
+function chgQty(type,d){
+  qty[type]=Math.max(1,qty[type]+d);
+  document.getElementById('q'+type).textContent=qty[type];updateP(type);
+}
+
+function addCart(type){
+  const details=[];
+  (GROUPS[type]||[]).forEach(g=>{if(O[g]&&O[g].v!=='No Egg')details.push(O[g].v);});
+  details.push(spiceVal[type]+' spice');
+  const up=BASE[type]+getExtra(type);
+  cart.push({id:Date.now(),name:NAMES[type],details:details.join(', '),qty:qty[type],up,total:up*qty[type]});
+  renderCart();showToast(NAMES[type]+' added! 🌯');
+}
+
+function addCombo(name,desc,price){
+  cart.push({id:Date.now(),name,details:desc,qty:1,up:price,total:price});
+  renderCart();showToast(name+' added! 🎉');
+}
+
+function removeCart(id){cart=cart.filter(i=>i.id!==id);renderCart();}
+
+function calcTotals(){
+  const sub=cart.reduce((s,i)=>s+i.total,0);
+  if(!coupon)return{sub,dis:0,total:sub};
+  const c=COUPONS[coupon];
+  let dis=c.t==='pct'?Math.round(sub*c.v/100):c.v;
+  dis=Math.min(dis,sub);
+  return{sub,dis,total:sub-dis};
+}
+
+function renderCart(){
+  const{dis,total}=calcTotals();
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-count').textContent=count;
+  document.getElementById('cart-total-bar').textContent=total;
+  document.getElementById('top-btn').disabled=cart.length===0;
+  const em=document.getElementById('emsg');
+  const ts=document.getElementById('ctotal-sec');
+  const dr=document.getElementById('drow');
+  if(cart.length===0){em.style.display='block';ts.style.display='none';dr.style.display='none';document.getElementById('citems').innerHTML='';return;}
+  em.style.display='none';ts.style.display='block';
+  document.getElementById('gtotal').textContent=total;
+  if(dis>0){dr.style.display='flex';document.getElementById('damt').textContent=dis;}else{dr.style.display='none';}
+  document.getElementById('citems').innerHTML=cart.map(i=>`
+    <div class="cart-item">
+      <div class="ci-name"><div>${i.name} ×${i.qty}</div><div class="ci-detail">${i.details}</div></div>
+      <div class="ci-price">₹${i.total}</div>
+      <button class="rm-btn" onclick="removeCart(${i.id})">✕</button>
+    </div>`).join('');
+}
+
+function applyCoupon(){
+  const code=document.getElementById('cinput').value.trim().toUpperCase();
+  const msg=document.getElementById('cmsg');
+  if(COUPONS[code]){coupon=code;msg.className='coupon-msg ok';msg.textContent='✅ "'+code+'" applied — '+COUPONS[code].l+'!';renderCart();showToast('Coupon applied! 🎉');}
+  else{msg.className='coupon-msg err';msg.textContent='❌ Invalid. Try FIRST10, SAVE20 or KARTIK5';}
+}
+
+function useCode(c){document.getElementById('cinput').value=c;applyCoupon();}
+
+function orderWA(){
+  if(!cart.length)return;
+  const{dis,total}=calcTotals();
+  let msg='🌯 *Order — Kartik Kaathi Roll*\n\n';
+  cart.forEach((i,n)=>{msg+=`${n+1}. ${i.name} ×${i.qty}\n   ${i.details}\n   ₹${i.total}\n\n`;});
+  if(dis>0)msg+=`🏷️ Discount: -₹${dis}\n`;
+  msg+=`💰 *Total: ₹${total}*\n\n📍 Railway Road, Etah, UP 207001`;
+  window.open('https://wa.me/919717159022?text='+encodeURIComponent(msg),'_blank');
+  document.getElementById('soverlay').classList.add('show');
+}
+
+function closeSuccess(){document.getElementById('soverlay').classList.remove('show');cart=[];coupon='';document.getElementById('cinput').value='';document.getElementById('cmsg').textContent='';renderCart();}
+function scrollToCart(){document.getElementById('cart-section').scrollIntoView({behavior:'smooth'});}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+['ce','cs','ve','pe','ps'].forEach(g=>{const b=document.querySelector(`[data-g="${g}"].active`);if(b)O[g]={v:b.dataset.v,p:parseInt(b.dataset.p)};});
+</script>
+</body>
+</html>
